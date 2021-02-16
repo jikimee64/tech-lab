@@ -76,6 +76,7 @@
   // pub/sub event
   ws.connect({}, function(frame) {
     //채팅룸 구독, 이 주소를 토픽으로 삼아 서버에서 메시지를 발행
+    //서버에서 발송하는 메시지를 구독자는 대기하고 있다가 받아서 처리
     ws.subscribe("/sub/chat/room/"+vm.$data.roomId, function(message) {
       var recv = JSON.parse(message.body);
       vm.recvMessage(recv);

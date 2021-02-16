@@ -13,17 +13,15 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class WebSockConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config){
+    public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/sub");
         config.setApplicationDestinationPrefixes("/pub");
     }
 
     //개발서버의 접속 주소 : ws://localhost:8080/ws-stomp
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry){
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws-stomp").setAllowedOrigins("*")
             .withSockJS();
     }
-
-
 }
