@@ -34,11 +34,22 @@ dependencies {
 	//embedded-redis
 	implementation 'it.ozimov:embedded-redis:0.7.2'
 
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	// 커스텀 추가
+	compile group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
+	testCompileOnly ('org.projectlombok:lombok') // 테스트 의존성 추가
+	testAnnotationProcessor('org.projectlombok:lombok') // 테스트 의존성 추가
 }
 
 test {
