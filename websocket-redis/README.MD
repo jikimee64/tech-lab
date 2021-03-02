@@ -8,9 +8,9 @@
 
 - (1) basic websocket server 
 - (2) Stomp로 채팅서버 고도화하기
-- (3) 여러대의 채팅서버간에 메시지 공유하기 by Redis pub/sub
+- (3) 여러대의 채팅서버간에 메시지 공유하기 by Redidws pub/sub
 - (4) SpringSecurity + Jwt를 적용하여 보안강화하기
-
+- (5) 채팅방 입장/퇴장 이벤트 처리, 인원수 표시
 
 - 추후 보완할점
     - 회원 DB 구축

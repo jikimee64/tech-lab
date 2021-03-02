@@ -33,10 +33,15 @@ public class ChatRoomController {
         return "/chat/room";
     }
 
+    /**
+     * 채팅방 리스트 조회사 userCount 정보 세팅
+     */
     @GetMapping("/rooms")
     @ResponseBody
-    public List<ChatRoom> room(){
-        return chatRoomRepository.findAllRoom();
+    public List<ChatRoom> room() {
+        List<ChatRoom> chatRooms = chatRoomRepository.findAllRoom();
+        chatRooms.stream().forEach(room -> room.setUserCount(chatRoomRepository.getUserCount(room.getRoomId())));
+        return chatRooms;
     }
 
     @PostMapping("/room")
