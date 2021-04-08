@@ -1,4 +1,4 @@
-package com.soap.webflux;
+package com.soap.webflux.servlet;
 
 import javax.servlet.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +6,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Deprecated
 @Configuration
 public class FilterConfig {
 

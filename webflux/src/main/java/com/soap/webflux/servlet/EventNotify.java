@@ -1,9 +1,10 @@
-package com.soap.webflux;
+package com.soap.webflux.servlet;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
+@Deprecated
 @Component
 public class EventNotify {
 
