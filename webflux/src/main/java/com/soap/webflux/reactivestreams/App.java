@@ -5,6 +5,7 @@ package com.soap.webflux.reactivestreams;
  * + 데이터가 소비가 끝나면 응답이 종료
  * SSE 적용(Servlet,WebFlux 둘다 가능, but 단일스레드방식이 좋음) = 데이터 소비가 끝나도 Stream 계속 유지
  */
+@Deprecated
 public class App {
     public static void main(String[] args) {
         MyPub pub = new MyPub(); // 신문사 생성

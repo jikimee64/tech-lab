@@ -8,6 +8,7 @@ import org.reactivestreams.Subscription;
  * 구독 정보
  * 정보 : 구독자, 어떤 데이터를 구독할지
  */
+@Deprecated
 public class MySubscription implements Subscription {
 
     private Subscriber s;

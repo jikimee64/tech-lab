@@ -3,6 +3,7 @@ package com.soap.webflux.reactivestreams;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+@Deprecated
 public class MySub implements Subscriber<Integer> {
 
     private Subscription s;
