@@ -3,6 +3,7 @@ package com.soap.githubapi;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -17,11 +18,22 @@ import org.kohsuke.github.GitHubBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/*
+
+API 문서 : https://docs.github.com/en/rest/reference/reactions#list-reactions-for-an-issue-comment
+
+https://api.github.com/repos/whiteship/live-study
+https://api.github.com/repos/whiteship/live-study/issues/1
+https://api.github.com/repos/whiteship/live-study/issues/1/comments
+
+header : Accept : application/vnd.github.squirrel-girl-preview+jso
+https://api.github.com/repos/whiteship/live-study/issues/1/reactions
+ */
 @SpringBootApplication
 public class GithubapiApplication {
 
 	//personal token need to secret
-	private static final String MY_PERSONAL_TOKEN = "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";
+	private static final String MY_PERSONAL_TOKEN = "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";
 
 	public static void main(String[] args) throws IOException {
 		GitHub github = new GitHubBuilder().withOAuthToken(MY_PERSONAL_TOKEN).build();
@@ -36,8 +48,37 @@ public class GithubapiApplication {
 
 		//Map<String, Integer> participant = new HashMap<>();
 
+	//	Map<String, String> topic = new HashMap<>();
+
 		for (GHIssue issue : issues) {
-			System.out.println(issue.getUrl());
+			//System.out.println(issue.listReactions().toList());
+
+			//System.out.println(issue.getUrl());
+			URL url = issue.getUrl();
+			String urlToStr = url.toString();
+			String key = urlToStr.substring(urlToStr.lastIndexOf("/")+1, urlToStr.length());
+			if(Integer.parseInt(key) <= 15){
+				System.out.println(urlToStr);
+				//topic.put(key, url.toString());
+				//System.out.println(issue.getComments().size());
+				System.out.println(issue.getComments().size());
+				for (GHIssueComment comment : issue.getComments()) {
+					//System.out.println(comment.getId());
+					//System.out.println(comment.getUser().getName());
+					System.out.println(comment.getUser().getLogin());
+					System.out.println(comment.listReactions().toList());
+
+
+					// 이거다
+					// https://api.github.com/repos/whiteship/live-study/issues/comments/787469111/reactions
+
+//					comment.getUser().get
+//					comment.getId();
+//					comment.getUser().getLogin();
+//					comment.getBody();
+				}
+
+			}
 		}
 
 		//1-18개 이슈
