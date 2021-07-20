@@ -33,7 +33,7 @@ https://api.github.com/repos/whiteship/live-study/issues/1/reactions
 public class GithubapiApplication {
 
 	//personal token need to secret
-	private static final String MY_PERSONAL_TOKEN = "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";
+	private static final String MY_PERSONAL_TOKEN = "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";
 
 	public static void main(String[] args) throws IOException {
 		GitHub github = new GitHubBuilder().withOAuthToken(MY_PERSONAL_TOKEN).build();
