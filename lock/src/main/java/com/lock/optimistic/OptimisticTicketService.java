@@ -1,9 +1,9 @@
 package com.lock.optimistic;
 
-import com.lock.Reservation;
-import com.lock.ReservationRepository;
-import com.lock.Ticket;
-import com.lock.TicketRepository;
+import com.lock.domain.Reservation;
+import com.lock.domain.ReservationRepository;
+import com.lock.domain.Ticket;
+import com.lock.domain.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.retry.annotation.Backoff;
@@ -41,8 +41,8 @@ public class OptimisticTicketService {
     public void ticketing(long ticketId) {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new IllegalArgumentException("Ticket Not Found."));
-        ticket.increaseReservedAmount();
         int sequence = ticket.getReservedAmount();
         reservationRepository.save(new Reservation(ticket, sequence));
+        ticket.increaseReservedAmount();
     }
 }

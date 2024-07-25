@@ -1,15 +1,12 @@
 package com.lock.optimistic;
 
-import com.lock.Reservation;
-import com.lock.ReservationRepository;
-import com.lock.Ticket;
-import com.lock.TicketRepository;
-import org.junit.jupiter.api.AfterAll;
+import com.lock.domain.ReservationRepository;
+import com.lock.domain.Ticket;
+import com.lock.domain.TicketRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -93,7 +90,7 @@ class OptimisticNonLockTicketServiceTest {
             });
         }
 
-        countDownLatch.await();;
+        countDownLatch.await();
 
         System.out.println("successCount = " + successCount);
         System.out.println("failCount = " + failCount);

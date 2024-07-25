@@ -1,8 +1,8 @@
-package com.lock.pessimistic;
+package com.lock.distributed;
 
-import com.lock.domain.ReservationRepository;
-import com.lock.domain.Ticket;
-import com.lock.domain.TicketRepository;
+import com.lock.distributed.domain.Event;
+import com.lock.distributed.domain.EventRepository;
+import com.lock.distributed.domain.EventTicketRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,29 +16,28 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-class PessimisticTicketServiceTest {
+class DistributedEventServiceTest {
+    @Autowired
+    private EventRepository eventRepository;
 
     @Autowired
-    private TicketRepository ticketRepository;
+    private EventTicketRepository eventTicketRepository;
 
     @Autowired
-    private ReservationRepository reservationRepository;
-
-    @Autowired
-    private PessimisticTicketService service;
+    private EventService service;
 
     @AfterEach
     void tearDown() {
-        reservationRepository.deleteAll();
-        ticketRepository.deleteAll();
+        eventTicketRepository.deleteAll();
+        eventRepository.deleteAll();
     }
 
     @Test
-    void 티켓_동시_예매_테스트() throws InterruptedException {
+    void 이벤트_티켓_동시성_테스트() throws InterruptedException {
         // given
         int memberCount = 30;
         int ticketAmount = 10;
-        Ticket ticket = ticketRepository.save(new Ticket(ticketAmount));
+        Event savedEvent = eventRepository.save(new Event(ticketAmount));
 
         ExecutorService executorService = Executors.newFixedThreadPool(memberCount);
         CountDownLatch countDownLatch = new CountDownLatch(memberCount);
@@ -50,7 +49,7 @@ class PessimisticTicketServiceTest {
         for (int i = 0; i < memberCount; i++) {
             executorService.submit(() -> {
                 try {
-                    service.ticketing(ticket.getId());
+                    service.createEventTicket(savedEvent.getId());
                     successCount.incrementAndGet();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -61,14 +60,14 @@ class PessimisticTicketServiceTest {
             });
         }
 
-        countDownLatch.await();;
+        countDownLatch.await();
 
         System.out.println("successCount = " + successCount);
         System.out.println("failCount = " + failCount);
 
         // then
-        long reservationCount = reservationRepository.count();
-        assertThat(reservationCount)
+        long eventTicketCount = eventTicketRepository.count();
+        assertThat(eventTicketCount)
                 .isEqualTo(Math.min(memberCount, ticketAmount));
     }
 

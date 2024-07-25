@@ -1,4 +1,4 @@
-package com.lock;
+package com.lock.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

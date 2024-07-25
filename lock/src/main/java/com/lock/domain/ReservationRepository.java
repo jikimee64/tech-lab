@@ -1,4 +1,4 @@
-package com.lock;
+package com.lock.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

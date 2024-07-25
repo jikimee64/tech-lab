@@ -1,9 +1,9 @@
 package com.lock.pessimistic;
 
-import com.lock.Reservation;
-import com.lock.ReservationRepository;
-import com.lock.Ticket;
-import com.lock.TicketRepository;
+import com.lock.domain.Reservation;
+import com.lock.domain.ReservationRepository;
+import com.lock.domain.Ticket;
+import com.lock.domain.TicketRepository;
 import com.lock.optimistic.Retry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

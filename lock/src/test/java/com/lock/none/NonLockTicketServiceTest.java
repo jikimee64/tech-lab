@@ -1,8 +1,8 @@
 package com.lock.none;
 
-import com.lock.ReservationRepository;
-import com.lock.Ticket;
-import com.lock.TicketRepository;
+import com.lock.domain.ReservationRepository;
+import com.lock.domain.Ticket;
+import com.lock.domain.TicketRepository;
 import com.lock.nonlock.NonLockTicketService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
